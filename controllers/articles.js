@@ -7,7 +7,7 @@ router.get('/', function(req, res){
   		res.render('articles/index', {articles: allArticles});
 	}).catch(function(err) {
 		console.log(err);
-		res.send('BIG OL ERROR')
+		res.render('error')
 	});
 });
 
@@ -16,7 +16,7 @@ router.get('/new', function(req, res){
   		res.render('articles/new', {authors: allAuthors});
 	}).catch(function(err) {
 		console.log(err);
-		res.send('oops');
+		res.render('error');
 	});
 });
 
@@ -28,18 +28,21 @@ router.get('/:id', function(req, res){
 		res.render('articles/show', {article: foundArticle});
 	}).catch(function(err) {
 		console.log(err);
-		res.send('oops');
+		res.render('error');
 	});
 });
 
 router.post('/', function(req, res){
-	console.log(req.body);
-	db.article.create(req.body).then(function(createdArticle) {
-		res.redirect('/articles/' + createdArticle.id);
-	}).catch(function(err) {
-		console.log(err);
-		res.send('NOOOOOO');
-	});
+	if(req.body.authorId > 0) {
+		db.article.create(req.body).then(function(createdArticle) {
+			res.redirect('/articles/' + createdArticle.id);
+		}).catch(function(err) {
+			console.log(err);
+			res.render('error');
+		});
+	} else {
+		res.redirect('/articles/new')
+	}
 });
 
 module.exports = router;

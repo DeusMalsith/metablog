@@ -3,7 +3,7 @@
 <form method="POST" action="/articles">
   <div class="form-group">
     <label for="name">Title:</label>
-    <input type="text" name="title" placeholder="What is your article about?" class="form-control">
+    <input type="text" name="title" placeholder="What is your article about?" class="form-control" required>
   </div>
   <div class="form-group">
     <label for="name">Author:</label>
@@ -21,7 +21,7 @@
   </div>
   <div class="form-group">
     <label for="name">Content:</label>
-    <textarea name="content" class="form-control"></textarea>
+    <textarea name="content" class="form-control" required></textarea>
   </div>
   <input type="submit" value="Post Article" class="btn btn-primary">
 </form>
