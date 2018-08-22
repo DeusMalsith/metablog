@@ -1,0 +1,19 @@
+<h2>#<%= tag.name%></h2>
+
+<h4>Articles associated with #<%= tag.name%></h4>
+
+<% tag.articles.forEach(function(a) {%>
+	<div>
+		<a href="/articles/<%= a.id%>">
+			<%= a.title%>
+		</a>
+	</div>
+<%});%>
+
+</a>
+<a href="/tags/edit/<%= tag.id%>"" class="btn btn-warning edit-btn">
+	Must you change it?
+</a>
+<a href="/tags/<%= tag.id%>"" class="btn btn-danger delete-btn">
+	Do you hate it?
+</a>
