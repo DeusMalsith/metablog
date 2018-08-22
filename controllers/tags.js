@@ -13,7 +13,12 @@ router.get('/', function(req, res) {
 });
 
 router.get('/edit/:id', function(req, res) {
-	res.send('edit tag form goes here later');
+	db.tag.findById(req.params.id).then(function(foundTag) {
+		res.render('tags/edit', {tag: foundTag});
+	}).catch(function(err) {
+		console.log('error', err);
+		res.render('error');
+	});
 });
 
 router.get('/:id', function(req, res) {
@@ -26,6 +31,10 @@ router.get('/:id', function(req, res) {
 		console.log(err);
 		res.render('error');
 	});
+});
+
+router.put('/:id', function(req, res) {
+	res.send(req.body);
 });
 
 router.delete('/:id', function(req, res) {
